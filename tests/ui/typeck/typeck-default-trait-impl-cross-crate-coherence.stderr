@@ -3,11 +3,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl DefaultedTrait for (A,) {}
    | ^^^^^^^^^^^^^^^^^^^^^^^^----
-   | |                       |
-   | |                       this is not defined in the current crate because tuples are always foreign
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                         |
+   |                         this is not defined in the current crate because tuples are always foreign
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:13:1
+   |
+LL | impl DefaultedTrait for (A,) {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:13:1
+   |
+LL | impl DefaultedTrait for (A,) {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error[E0117]: only traits defined in the current crate can be implemented for arbitrary types
@@ -15,11 +23,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl !DefaultedTrait for (B,) {}
    | ^^^^^^^^^^^^^^^^^^^^^^^^^----
-   | |                        |
-   | |                        this is not defined in the current crate because tuples are always foreign
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                          |
+   |                          this is not defined in the current crate because tuples are always foreign
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:16:1
+   |
+LL | impl !DefaultedTrait for (B,) {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:16:1
+   |
+LL | impl !DefaultedTrait for (B,) {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error[E0321]: cross-crate traits with a default impl, like `DefaultedTrait`, can only be implemented for a struct/enum type defined in the current crate
@@ -33,11 +49,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ty
    |
 LL | impl DefaultedTrait for lib::Something<C> {}
    | ^^^^^^^^^^^^^^^^^^^^^^^^-----------------
-   | |                       |
-   | |                       `Something` is not defined in the current crate
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                         |
+   |                         `Something` is not defined in the current crate
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:21:1
+   |
+LL | impl DefaultedTrait for lib::Something<C> {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/typeck-default-trait-impl-cross-crate-coherence.rs:21:1
+   |
+LL | impl DefaultedTrait for lib::Something<C> {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error: aborting due to 4 previous errors

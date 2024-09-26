@@ -3,12 +3,20 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl std::ops::AddAssign for () {
    | ^^^^^-------------------^^^^^--
-   | |    |                       |
-   | |    |                       this is not defined in the current crate because tuples are always foreign
-   | |    this is not defined in the current crate because this is a foreign trait
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |      |                       |
+   |      |                       this is not defined in the current crate because tuples are always foreign
+   |      this is not defined in the current crate because this is a foreign trait
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/issue-67535.rs:3:1
+   |
+LL | impl std::ops::AddAssign for () {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/issue-67535.rs:3:1
+   |
+LL | impl std::ops::AddAssign for () {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error[E0117]: only traits defined in the current crate can be implemented for arbitrary types
@@ -16,12 +24,20 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl std::ops::AddAssign for [(); 1] {
    | ^^^^^-------------------^^^^^-------
-   | |    |                       |
-   | |    |                       this is not defined in the current crate because arrays are always foreign
-   | |    this is not defined in the current crate because this is a foreign trait
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |      |                       |
+   |      |                       this is not defined in the current crate because arrays are always foreign
+   |      this is not defined in the current crate because this is a foreign trait
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/issue-67535.rs:10:1
+   |
+LL | impl std::ops::AddAssign for [(); 1] {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/issue-67535.rs:10:1
+   |
+LL | impl std::ops::AddAssign for [(); 1] {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error[E0117]: only traits defined in the current crate can be implemented for arbitrary types
@@ -29,12 +45,20 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl std::ops::AddAssign for &[u8] {
    | ^^^^^-------------------^^^^^-----
-   | |    |                       |
-   | |    |                       this is not defined in the current crate because slices are always foreign
-   | |    this is not defined in the current crate because this is a foreign trait
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |      |                       |
+   |      |                       this is not defined in the current crate because slices are always foreign
+   |      this is not defined in the current crate because this is a foreign trait
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/issue-67535.rs:17:1
+   |
+LL | impl std::ops::AddAssign for &[u8] {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/issue-67535.rs:17:1
+   |
+LL | impl std::ops::AddAssign for &[u8] {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error: aborting due to 3 previous errors

@@ -3,11 +3,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl fmt::Display for *mut LocalType {
    | ^^^^^^^^^^^^^^^^^^^^^^--------------
-   | |                     |
-   | |                     `*mut LocalType` is not defined in the current crate because raw pointers are always foreign
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                       |
+   |                       `*mut LocalType` is not defined in the current crate because raw pointers are always foreign
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/issue-99572-impl-trait-on-pointer.rs:7:1
+   |
+LL | impl fmt::Display for *mut LocalType {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/issue-99572-impl-trait-on-pointer.rs:7:1
+   |
+LL | impl fmt::Display for *mut LocalType {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 help: consider introducing a new wrapper type
    |
@@ -21,11 +29,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
    |
 LL | impl<T> marker::Copy for *mut T {
    | ^^^^^^^^^^^^^^^^^^^^^^^^^------
-   | |                        |
-   | |                        `*mut T` is not defined in the current crate because raw pointers are always foreign
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                          |
+   |                          `*mut T` is not defined in the current crate because raw pointers are always foreign
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/issue-99572-impl-trait-on-pointer.rs:19:1
+   |
+LL | impl<T> marker::Copy for *mut T {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/issue-99572-impl-trait-on-pointer.rs:19:1
+   |
+LL | impl<T> marker::Copy for *mut T {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error: aborting due to 2 previous errors

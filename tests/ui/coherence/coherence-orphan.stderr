@@ -3,12 +3,20 @@ error[E0117]: only traits defined in the current crate can be implemented for pr
    |
 LL | impl TheTrait<usize> for isize {}
    | ^^^^^---------------^^^^^-----
-   | |    |                   |
-   | |    |                   `isize` is not defined in the current crate
-   | |    `usize` is not defined in the current crate
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |      |                   |
+   |      |                   `isize` is not defined in the current crate
+   |      `usize` is not defined in the current crate
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/coherence-orphan.rs:10:1
+   |
+LL | impl TheTrait<usize> for isize {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/coherence-orphan.rs:10:1
+   |
+LL | impl TheTrait<usize> for isize {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error[E0117]: only traits defined in the current crate can be implemented for types defined outside of the crate
@@ -16,11 +24,19 @@ error[E0117]: only traits defined in the current crate can be implemented for ty
    |
 LL | impl !Send for Vec<isize> {}
    | ^^^^^^^^^^^^^^^----------
-   | |              |
-   | |              `Vec` is not defined in the current crate
-   | impl doesn't have any local type before any uncovered type parameters
-   | for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+   |                |
+   |                `Vec` is not defined in the current crate
    |
+note: impl doesn't have any local type before any uncovered type parameters
+  --> $DIR/coherence-orphan.rs:17:1
+   |
+LL | impl !Send for Vec<isize> {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+  --> $DIR/coherence-orphan.rs:17:1
+   |
+LL | impl !Send for Vec<isize> {}
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^
    = note: define and implement a trait or new type instead
 
 error: aborting due to 2 previous errors
